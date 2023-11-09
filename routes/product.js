@@ -5,8 +5,8 @@ const upload = require("../config/multer")
 
 const ProductController = require("../controllers/productController")
 
-router.post("/", upload.single("file"), ProductController.create)
-router.get("/", ProductController.findAll)
-router.delete("/:id", ProductController.remove)
+router.post("https://api-node-express-nine.vercel.app/", upload.single("file"), ProductController.create)
+router.get("https://api-node-express-nine.vercel.app/", ProductController.findAll)
+router.delete("https://api-node-express-nine.vercel.app/:id", ProductController.remove)
 
 module.exports = router
