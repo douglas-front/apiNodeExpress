@@ -6,7 +6,7 @@ mongoose.set("strictQuery", true)
 
 async function main() {
     await mongoose.connect(
-        `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASS}@cluster0.9wmudcc.mongodb.net/?retryWrites=true&w=majority`
+        `${process.env.DBCONECT}`
     );
     
     console.log('deu certo')
