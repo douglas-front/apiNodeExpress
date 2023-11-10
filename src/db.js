@@ -4,7 +4,7 @@ require("dotenv").config()
 
 mongoose.set("strictQuery", true)
 
-async function main() {
+async function connectWithDatabase() {
     try {
         await mongoose.connect(process.env.DBCONECT);
         
@@ -15,6 +15,4 @@ async function main() {
     }
 }
 
-main().catch((err) => console.log(err))
-
-module.exports = main;
+module.exports = connectWithDatabase;

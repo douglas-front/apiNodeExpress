@@ -2,16 +2,28 @@ const express = require("express")
 const app = express()
 
 require("dotenv").config()
-require("./db")
+const connectWithDatabase = require("./db")
 
-const port = process.env.PORT || 3000
+app.use(express.json())
 
-const productRouter = require("./routes/product")   
+connectWithDatabase()
 
-app.use("/product", productRouter)
+const PORT = process.env.PORT || 3000
 
-app.listen(port, ()=>{
-    console.log(`ok ${port}`)
+// const productRouter = require("./routes/product")
+
+app.get("/", async (req, res) => {
+    try {
+        return res.status(200).json({message: "Hello world!"})
+    } catch (error) {
+        throw error
+    }
+})
+
+// app.use("/product", productRouter)
+
+app.listen(PORT, ()=>{
+    console.log(`ok ${PORT}`)
 })
 
 
