@@ -5,11 +5,5 @@
             "source": "/src/(.*)",
             "destination": "/src"
         }
-    ],
-    "builds": [
-        {
-            "src": "/src",
-            "use": "@vercel/node"
-        }
     ]
 }
