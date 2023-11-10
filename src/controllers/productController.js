@@ -1,6 +1,8 @@
 const Product = require("../models/Product")
 const fs = require("fs")
 
+console.log("productController has connected")
+
 exports.create = async (req, res) => {
     try {
         const { name } = req.body
