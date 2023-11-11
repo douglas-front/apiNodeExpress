@@ -5,13 +5,13 @@ console.log("productController has connected")
 
 exports.create = async (req, res) => {
     try {
-        const { name } = req.body
-        // const file = req.file
+        const name = req.body
+        const file = req.file
 
         const product = new Product({
             name,
-            // src: file.path
-        });
+            file: file.path,
+        })
 
         await product.save()
 
