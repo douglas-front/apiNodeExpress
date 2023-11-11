@@ -16,7 +16,7 @@ const productRouter = require("./routes/product")
 
 
 
-app.use("/", productRouter)
+app.use("/product", productRouter)
 
 app.listen(PORT, ()=>{
     console.log(`ok ${PORT}`)
