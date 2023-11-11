@@ -1,23 +1,47 @@
 const Product = require("../models/Product");
-const fs = require("fs");
+const fs = require("fs/promises");
+const path = require("path")
 
 console.log("productController has connected");
 
 exports.create = async (req, res) => {
     try {
+        // console.log("Entrou no controlador create");
+        // console.log("Request: ", req)
+
         const { name } = req.body;
         const file = req.file;
 
+        // console.log("File: ", file)
+       
+
         const product = new Product({
             name,
-            file: file.filename, // Corrigido para usar file.filename em vez de file.path
+            file: file.filename,
         });
+
 
         await product.save();
 
-        res.json({ product, msg: 'salvo' });
+        const dirPath = "./images"
+        console.log("File: ", file.filename)
+        fs.unlink(path.join(dirPath, file.filename))
+
+        // const files = await fs.readdir("./images/")
+        // console.log("files inside ./images :", files)
+
+        // const deleteFilePromises = files.map(file =>
+ 
+        //     console.log("File: ", file)
+        //     // fs.unlink(path.join(dirPath, file)),
+        // );
+
+        // await Promise.all(deleteFilePromises)
+
+        return res.status(200).json({ message: 'Salvou' });
+
     } catch (error) {
-        console.error('Erro ao criar produto:', error);
+        console.log(error)
         res.status(500).json({ message: 'Erro ao salvar' });
     }
 };
