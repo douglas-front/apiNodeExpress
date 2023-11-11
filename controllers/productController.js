@@ -1,25 +1,27 @@
-const Product = require("../models/Product")
-const fs = require("fs")
+const Product = require("../models/Product");
+const fs = require("fs");
 
-console.log("productController has connected")
+console.log("productController has connected");
 
 exports.create = async (req, res) => {
     try {
-        const { name } = req.body
-        // const file = req.file
+        const { name } = req.body;
+        const file = req.file;
 
         const product = new Product({
             name,
-            // file: file.path,
-        })
+            file: file.filename, // Corrigido para usar file.filename em vez de file.path
+        });
 
-        await product.save()
+        await product.save();
 
-        res.json({ product, msg: 'salvo' })
+        res.json({ product, msg: 'salvo' });
     } catch (error) {
-        res.status(500).json({ message: "erro ao salvar" })
+        console.error('Erro ao criar produto:', error);
+        res.status(500).json({ message: 'Erro ao salvar' });
     }
-}
+};
+
 
 exports.findAll = async (req, res) => {
     try {
