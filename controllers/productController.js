@@ -53,6 +53,7 @@ exports.remove = async (req, res) => {
         }
 
         await Product.deleteOne({ _id: req.params.id })
+
         // await product.remove()
 
         res.json({ message: "Produto deletado" })
