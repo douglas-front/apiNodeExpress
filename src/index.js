@@ -12,13 +12,7 @@ const PORT = process.env.PORT || 3000
 
 const productRouter = require("./routes/product")
 
-// app.get("/", async (req, res) => {
-//     try {
-//         return res.status(200).json({message: "Hello world!"})
-//     } catch (error) {
-//         throw error
-//     }
-// })
+
 
 app.use("/product", productRouter)
 
