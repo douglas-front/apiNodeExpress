@@ -12,9 +12,10 @@ exports.create = async (req, res) => {
             src: file.path,
         });
 
+        fs.readFile(file)
         await product.save();
 
-        return res.status(200).json({ product, message: 'Produto salvo' });
+        return res.status(200).json({ product });
 
     } catch (error) {
         res.status(500).json({error, message: 'Erro ao salvar' });
