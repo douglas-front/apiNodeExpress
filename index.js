@@ -1,20 +1,14 @@
 const express = require("express")
 const app = express()
 
-
-
 require("dotenv").config()
-const connectWithDatabase = require("./db")
+require("./db")
 
 app.use(express.json())
-
-connectWithDatabase()
 
 const PORT = process.env.PORT || 3000
 
 const productRouter = require("./routes/product")
-
-
 
 app.use("/product", productRouter)
 
