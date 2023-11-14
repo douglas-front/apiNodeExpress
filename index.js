@@ -11,6 +11,8 @@ app.use((req, res, next) => {
     next();
 })
 app.use(express.json())
+app.use(express.static(__dirname + "/uploads"));
+
 
 const PORT = process.env.PORT || 3000
 

@@ -1,16 +1,18 @@
-const multer = require("multer")
-
-const path = require("path")
+const multer = require("multer");
+const path = require("path");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.resolve("uploads"))
+        cb(null, path.resolve("uploads")); // Adicionada uma barra entre __dirname e "uploads/"
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname))
+        // Use o valor do campo 'name' como parte do nome do arquivo
+        const sanitizedName = req.body.name.replace(/[^a-zA-Z0-9]/g, '_'); // Remove caracteres especiais
+        const fileName = `${sanitizedName}${path.extname(file.originalname)}`;
+        cb(null, fileName);
     }
-})
+});
 
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 
-module.exports = upload
+module.exports = upload;
