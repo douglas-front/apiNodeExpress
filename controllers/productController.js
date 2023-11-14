@@ -1,34 +1,36 @@
 const Product = require("../models/Product");
+const { uploadToVercelTempDirectory } = require('../upload');
 const fs = require('fs');
-const path = require('path'); // Adicione esta linha no início do arquivo
-
+const path = require('path');
 
 exports.create = async (req, res) => {
     try {
         const { name } = req.body;
-
         const file = req.file;
 
         const extension = path.extname(file.originalname);
+
+        // Mova o arquivo para o diretório temporário
+        const tempFilePath = await uploadToVercelTempDirectory(file.path);
+
         const product = new Product({
             name,
-            src: file.path,
+            src: tempFilePath,
             extension,
         });
 
+        // Salve o produto no banco de dados
         await product.save();
 
-
-          
-
+        // Retorne a resposta JSON
         return res.status(200).json({ product });
 
-
-
     } catch (error) {
+        console.error('Erro ao processar a requisição:', error);
         res.status(500).json({ error, message: 'Erro ao salvar' });
     }
 };
+
 
 
 exports.findAll = async (req, res) => {
