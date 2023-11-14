@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
-const fs = require("fs")
+const fs = require('fs');
+const { promisify } = require('util');
+const readFileAsync = promisify(fs.readFile);
 
 exports.create = async (req, res) => {
     try {
@@ -12,15 +14,16 @@ exports.create = async (req, res) => {
             src: file.path,
         });
 
-        fs.readFile(file)
+        await readFileAsync(file.path);
         await product.save();
 
         return res.status(200).json({ product });
 
     } catch (error) {
-        res.status(500).json({error, message: 'Erro ao salvar' });
+        res.status(500).json({ error, message: 'Erro ao salvar' });
     }
 };
+
 
 
 exports.findAll = async (req, res) => {
