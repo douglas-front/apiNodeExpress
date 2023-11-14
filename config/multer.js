@@ -3,7 +3,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.resolve("uploads")); // Adicionada uma barra entre __dirname e "uploads/"
+        cb(null, path.resolve(__dirname, "uploads")); // Adicionada uma barra entre __dirname e "uploads/"
     },
     filename: function (req, file, cb) {
         // Use o valor do campo 'name' como parte do nome do arquivo
